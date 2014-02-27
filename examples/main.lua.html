@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>RadarChart</h1>
+
+
+
+
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><strong>main.lua</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../index.html">RadarChart</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Example <code>main.lua</code></h1>
+
+    <pre>
+<span class="global">math</span>.randomseed(<span class="global">os</span>.time())
+
+c = <span class="global">require</span>(<span class="string">"radarchart"</span>)
+
+<span class="keyword">function</span> love.<span class="global">load</span>()
+
+  <span class="comment">-- Evidence to show that the current color and font are internal
+</span>  love.graphics.setColor(<span class="number">0</span>,<span class="number">255</span>,<span class="number">255</span>)
+  love.graphics.setFont(love.graphics.newFont(<span class="number">24</span>))
+
+  <span class="keyword">local</span> pokedata = {} <span class="comment">-- init the data set
+</span>  <span class="keyword">for</span> i = <span class="number">1</span>,<span class="global">math</span>.random(<span class="number">3</span>,<span class="number">10</span>) <span class="keyword">do</span> <span class="comment">-- add 3 to 10 random data points
+</span>    <span class="comment">-- Add data point into data set
+</span>    <span class="global">table</span>.insert(pokedata,{
+      label=<span class="string">"Test "</span>..i, <span class="comment">-- A basic string
+</span>      value=<span class="global">math</span>.random()}) <span class="comment">-- A random number 0..1
+</span>  <span class="keyword">end</span>
+
+  poke = c.new(
+    pokedata, <span class="comment">-- The data set object
+</span>    love.graphics.getWidth()/<span class="number">2</span>, <span class="comment">-- X position
+</span>    love.graphics.getHeight()/<span class="number">2</span>, <span class="comment">-- Y position
+</span>    <span class="global">math</span>.random(<span class="number">200</span>,<span class="number">280</span>) <span class="comment">-- The radius of the object
+</span>  )
+  poke:setTicks(<span class="global">math</span>.random(<span class="number">1</span>,<span class="number">10</span>)) <span class="comment">-- The number of horizontal ticks
+</span>  <span class="comment">-- Instead of starting at the top (default) we will start at the right
+</span>  poke:setRadianOffset(<span class="number">0</span>)
+
+  <span class="keyword">local</span> rcolor
+  rcolor = random_color()
+  rcolor[<span class="number">4</span>] = <span class="number">127</span> <span class="comment">-- alpha
+</span>  <span class="comment">-- Set the area inside the data to a random color
+</span>  poke:setColor(<span class="string">"integral"</span>,rcolor)
+
+  <span class="keyword">if</span> <span class="global">math</span>.random(<span class="number">0</span>,<span class="number">1</span>) ==<span class="number">1</span> <span class="keyword">then</span> <span class="comment">-- 50% of the time
+</span>    <span class="comment">-- Here we make the graph pretty
+</span>    rcolor = random_color()
+    rcolor[<span class="number">4</span>] = <span class="number">62</span> <span class="comment">-- alpha
+</span>     <span class="comment">-- Change the draw mode of the ticks to fill
+</span>    poke:setDrawMode(<span class="string">"ticks"</span>,<span class="string">"fill"</span>)
+    poke:setColor(<span class="string">"htick"</span>,rcolor) <span class="comment">-- Set the color of the ticks
+</span>  <span class="keyword">end</span>
+
+<span class="keyword">end</span>
+
+<span class="comment">-- This function returns a random color
+</span><span class="keyword">function</span> random_color()
+  <span class="keyword">local</span> n,x = <span class="number">63</span>,<span class="number">255</span>
+  <span class="keyword">return</span> {<span class="global">math</span>.random(n,x),<span class="global">math</span>.random(n,x),<span class="global">math</span>.random(n,x)}<span class="comment">-- RGB
+</span><span class="keyword">end</span>
+
+<span class="keyword">function</span> love.draw()
+  poke:draw() <span class="comment">-- Draw the chart
+</span>  <span class="comment">-- evidence that the color and font is reset
+</span>  love.graphics.<span class="global">print</span>(love.timer.getFPS(),<span class="number">16</span>,<span class="number">16</span>)
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> love.update(dt)
+
+  <span class="comment">-- for each data point
+</span>  <span class="keyword">for</span> i,v <span class="keyword">in</span> <span class="global">pairs</span>( poke:getData() ) <span class="keyword">do</span>
+    <span class="comment">-- increase and clamp the data for a cool growing effect
+</span>    v.value = v.value + <span class="number">0.1</span>*dt
+    <span class="keyword">if</span> v.value &gt; <span class="number">1</span> <span class="keyword">then</span>
+      v.value = v.value - <span class="number">1</span>
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+
+  <span class="comment">-- Slowly rotate the entire chart by 0.25 rad/s
+</span>  poke:setRadianOffset( poke:getRadianOffset() + dt*<span class="number">0.25</span> )
+
+<span class="keyword">end</span>
+
+<span class="keyword">function</span> love.keypressed()
+  <span class="comment">-- rebuild the object
+</span>  love.<span class="global">load</span>()
+<span class="keyword">end</span></pre>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.0</a></i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
