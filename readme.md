@@ -2,14 +2,12 @@
 
 RadarChart is a radar/spider chart generator module for LÖVE.
 
-# Documentation
+## Documentation
 
-To build, use [LDoc](http://stevedonovan.github.io/ldoc/):
+Please visit [josefnpat.github.io/RadarChart](http://josefnpat.github.io/RadarChart/).
 
-    ldoc .
+To build documentation from source, use [LDoc](http://stevedonovan.github.io/ldoc/).
 
-or just read the inline comments.
-
-# License
+## License
 
 zlib/libpng
