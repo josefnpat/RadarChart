@@ -275,8 +275,10 @@ end
 
 --- Determine the point at a specific radius from the objects internals.
 -- This is an internal function.
--- @param index The index of the data set to be used.
--- @param rad The radius for the calculation.
+-- @param index <i>Required</i> The index of the data set to be used.
+-- @param x <i>Required</i> The X position of the center of the radar chart.
+-- @param y <i>Required</i> The Y position of the center of the radar chart.
+-- @param radius <i>Required</i> The radius for the calculation.
 -- @return number,number
 function RadarChart:_point(index,x,y,radius)
   local step = 2*math.pi/#self._data
