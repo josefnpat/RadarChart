@@ -21,14 +21,6 @@ function RadarChart.new(data,x,y,radius)
   r.getData = RadarChart.getData
   r:setData(data)
 
-  r.setPosition = RadarChart.setPosition
-  r.getPosition = RadarChart.getPosition
-  r:setPosition(x,y)
-
-  r.setRadius = RadarChart.setRadius
-  r.getRadius = RadarChart.getRadius
-  r:setRadius(radius)
-
   r.setTicks = RadarChart.setTicks
   r.getTicks = RadarChart.getTicks
   r:setTicks(1)
@@ -67,7 +59,20 @@ end
 
 --- Main draw function.
 -- This is the main draw function that is required to be run in <code>love.draw()</code>.
-function RadarChart:draw()
+-- @param x <i>Required</i> The X position of the center of the radar chart.
+-- @param y <i>Required</i> The Y position of the center of the radar chart.
+-- @param radius <i>Required</i> The radius of the radar chart from the center defined from X and Y.
+function RadarChart:draw(x,y,radius)
+
+  assert(type(x)=="number",
+    "draw: `x` expects a number, got "..type(x)..".")
+  assert(type(y)=="number",
+    "draw: `y` expects a number, got "..type(y)..".")
+  assert(type(radius)=="number",
+    "draw: `radius` expects a number, got "..type(radius)..".")
+  assert(radius > 0,
+    "draw: `radius` expects a number greater than zero, got "..radius..".")
+
   -- back up the font and color
   local oc,of = {love.graphics.getColor()},love.graphics.getFont()
   love.graphics.setFont(self._font)
@@ -76,9 +81,9 @@ function RadarChart:draw()
     love.graphics.setColor(self._colors.vtick)
     local points = {}
     for i,v in pairs(self._data) do
-      local radius = self._radius * tick/self._ticks
-      local ax,ay = self:_point(i,radius)
-      love.graphics.line(self._x,self._y,ax,ay)
+      local tradius = radius * tick/self._ticks
+      local ax,ay = self:_point(i,x,y,tradius)
+      love.graphics.line(x,y,ax,ay)
       table.insert(points,ax)
       table.insert(points,ay)
     end
@@ -86,17 +91,17 @@ function RadarChart:draw()
     love.graphics.polygon(self._drawmodes.ticks,points)
   end
 
-  local prevx,prevy = self:_point(-1,
-    self._radius*self._data[#self._data].value)
+  local prevx,prevy = self:_point(-1,x,y,
+    radius*self._data[#self._data].value)
   for i,v in pairs(self._data) do
     love.graphics.setColor(self._colors.integral)
-    local vrad = self._radius * v.value
-    local vx,vy = self:_point(i-1,vrad)
-    local vpoints = {prevx,prevy,vx,vy,self._x,self._y}
+    local vrad = radius * v.value
+    local vx,vy = self:_point(i-1,x,y,vrad)
+    local vpoints = {prevx,prevy,vx,vy,x,y}
     love.graphics.polygon(self._drawmodes.integral,vpoints)
     prevx,prevy = vx,vy
-    local tx,ty = self:_point(i,self._radius+self._font:getHeight())
-    local tx_offset = tx < self._x and -self._font:getWidth(v.label) or 0
+    local tx,ty = self:_point(i,x,y,radius+self._font:getHeight())
+    local tx_offset = tx < x and -self._font:getWidth(v.label) or 0
     love.graphics.setColor(self._colors.font)
     love.graphics.print(v.label,tx+tx_offset,ty-self._font:getHeight()/2)
   end
@@ -147,38 +152,6 @@ end
 -- @return dataset
 function RadarChart:getData()
   return self._data
-end
-
---- Set the X and Y position of the center.
--- @param x <i>Required</i> The X position of the center of the radar chart.
--- @param y <i>Required</i> The Y position of the center of the radar chart.
-function RadarChart:setPosition(x,y)
-  assert(type(x)=="number",
-    "setPosition: `x` expects a number, got "..type(x)..".")
-  assert(type(y)=="number",
-    "setPosition: `y` expects a number, got "..type(y)..".")
-  self._x,self._y = x,y
-end
-
---- Return the X and Y position of the center.
--- @return number,number
-function RadarChart:getPosition()
-  return self._x,self._y
-end
-
---- Set the radius.
--- This will be drawn at the outmost horizontal tick. Keep in mind, the text will be drawn outside of this radius.
--- @param radius The radius that the radar chart should draw at.
-function RadarChart:setRadius(radius)
-  assert(type(radius)=="number",
-    "setRadius: `radius` expects a number, got "..type(radius)..".")
-  self._radius = radius
-end
-
---- Return the radius.
--- @return number
-function RadarChart:getRadius()
-  return self._rad
 end
 
 --- Set the number of ticks.
@@ -305,11 +278,10 @@ end
 -- @param index The index of the data set to be used.
 -- @param rad The radius for the calculation.
 -- @return number,number
-function RadarChart:_point(index,rad)
-  local r = rad or self._radius
+function RadarChart:_point(index,x,y,radius)
   local step = 2*math.pi/#self._data
-  local x = self._x + r * math.cos(index*step+self._radian_offset)
-  local y = self._y + r * math.sin(index*step+self._radian_offset)
+  local x = x + radius * math.cos(index*step+self._radian_offset)
+  local y = y + radius * math.sin(index*step+self._radian_offset)
   return x,y
 end
 
