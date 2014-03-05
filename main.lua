@@ -16,12 +16,16 @@ function love.load()
       value=math.random()}) -- A random number 0..1
   end
 
-  poke = c.new(
-    pokedata, -- The data set object
-    love.graphics.getWidth()/2, -- X position
-    love.graphics.getHeight()/2, -- Y position
-    math.random(200,280) -- The radius of the object
+  poke = c.new( -- new instance of the radar chart
+    pokedata -- the data set object
   )
+
+  pokedraw = { -- The draw information
+    x=love.graphics.getWidth()/2, -- X position
+    y=love.graphics.getHeight()/2, -- Y position
+    radius=math.random(200,280) -- The radius of the object
+  }
+
   poke:setTicks(math.random(1,10)) -- The number of horizontal ticks
   -- Instead of starting at the top (default) we will start at the right
   poke:setRadianOffset(0)
@@ -50,7 +54,7 @@ function random_color()
 end
 
 function love.draw()
-  poke:draw() -- Draw the chart
+  poke:draw(pokedraw.x,pokedraw.y,pokedraw.radius) -- Draw the chart
   -- evidence that the color and font is reset
   love.graphics.print(love.timer.getFPS(),16,16)
 end
