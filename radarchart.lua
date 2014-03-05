@@ -8,10 +8,7 @@ local RadarChart = {}
 
 --- Instansiate a new instance of a radar chart.
 -- @param data <i>Required</i> The data set that the radar chart should operate on. See <a href="#RadarChart:setData">RadarChart.setData</a> for information on the structure of this object.
--- @param x <i>Required</i> The X position of the center of the radar chart.
--- @param y <i>Required</i> The Y position of the center of the radar chart.
--- @param radius <i>Required</i> The radius of the radar chart from the center defined from X and Y.
-function RadarChart.new(data,x,y,radius)
+function RadarChart.new(data)
   local r = {}
 
   r.draw = RadarChart.draw
