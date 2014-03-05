@@ -34,11 +34,11 @@
 
 
 <h2>Modules</h2>
-<ul class="nowrap">
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><strong>RadarChart</strong></li>
 </ul>
 <h2>Examples</h2>
-<ul class="nowrap">
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
   <li><a href="examples/main.lua.html">main.lua</a></li>
 </ul>
 
@@ -47,14 +47,13 @@
 <div id="content">
 
 <h1>Module <code>RadarChart</code></h1>
-
 <p>RadarChart is a radar/spider chart generator module for LÖVE.</p>
 <p></p>
     <h3>Info:</h3>
     <ul>
+        <li><strong>Copyright</strong>: 2014</li>
         <li><strong>License</strong>: <a href="http://www.opensource.org/licenses/zlib-license.php">zlib/libpng</a></li>
         <li><strong>Author</strong>: Josef N Patoprsty <seppi@josefnpat.com></li>
-        <li><strong>Copyright</strong>: 2014</li>
     </ul>
 
 
@@ -65,75 +64,59 @@
 	<td class="summary">Instansiate a new instance of a radar chart.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:draw">RadarChart:draw ()</a></td>
+	<td class="name" nowrap><a href="#draw">draw (x, y, radius)</a></td>
 	<td class="summary">Main draw function.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:setData">RadarChart:setData (data)</a></td>
+	<td class="name" nowrap><a href="#setData">setData (data)</a></td>
 	<td class="summary">Set the data set.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:getData">RadarChart:getData ()</a></td>
+	<td class="name" nowrap><a href="#getData">getData ()</a></td>
 	<td class="summary">Return the data set.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:setPosition">RadarChart:setPosition (x, y)</a></td>
-	<td class="summary">Set the X and Y position of the center.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#RadarChart:getPosition">RadarChart:getPosition ()</a></td>
-	<td class="summary">Return the X and Y position of the center.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#RadarChart:setRadius">RadarChart:setRadius (radius)</a></td>
-	<td class="summary">Set the radius.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#RadarChart:getRadius">RadarChart:getRadius ()</a></td>
-	<td class="summary">Return the radius.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#RadarChart:setTicks">RadarChart:setTicks (ticks)</a></td>
+	<td class="name" nowrap><a href="#setTicks">setTicks (ticks)</a></td>
 	<td class="summary">Set the number of ticks.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:getTicks">RadarChart:getTicks ()</a></td>
+	<td class="name" nowrap><a href="#getTicks">getTicks ()</a></td>
 	<td class="summary">Return the number of ticks.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:setRadianOffset">RadarChart:setRadianOffset (radian_offset)</a></td>
+	<td class="name" nowrap><a href="#setRadianOffset">setRadianOffset (radian_offset)</a></td>
 	<td class="summary">Set the radian offset.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:getRadianOffset">RadarChart:getRadianOffset ()</a></td>
+	<td class="name" nowrap><a href="#getRadianOffset">getRadianOffset ()</a></td>
 	<td class="summary">Returns the radian offset.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:setColor">RadarChart:setColor (name, color)</a></td>
+	<td class="name" nowrap><a href="#setColor">setColor (name, color)</a></td>
 	<td class="summary">Sets the color of an element.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:getColor">RadarChart:getColor (name)</a></td>
+	<td class="name" nowrap><a href="#getColor">getColor (name)</a></td>
 	<td class="summary">Return the color for an element.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:setDrawMode">RadarChart:setDrawMode (name, drawmode)</a></td>
+	<td class="name" nowrap><a href="#setDrawMode">setDrawMode (name, drawmode)</a></td>
 	<td class="summary">Sets the drawmode of an element.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:getDrawMode">RadarChart:getDrawMode (name)</a></td>
+	<td class="name" nowrap><a href="#getDrawMode">getDrawMode (name)</a></td>
 	<td class="summary">Return the DrawMode for an element.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:setFont">RadarChart:setFont (font)</a></td>
+	<td class="name" nowrap><a href="#setFont">setFont (font)</a></td>
 	<td class="summary">Set the font.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:getFont">RadarChart:getFont ()</a></td>
+	<td class="name" nowrap><a href="#getFont">getFont ()</a></td>
 	<td class="summary">Return the font.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#RadarChart:_point">RadarChart:_point (index, rad)</a></td>
+	<td class="name" nowrap><a href="#_point">_point (index, x, y, radius)</a></td>
 	<td class="summary">Determine the point at a specific radius from the objects internals.</td>
 	</tr>
 </table>
@@ -150,6 +133,7 @@
     </dt>
     <dd>
     Instansiate a new instance of a radar chart.
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -173,13 +157,26 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:draw"></a>
-    <strong>RadarChart:draw ()</strong>
+    <a name = "draw"></a>
+    <strong>draw (x, y, radius)</strong>
     </dt>
     <dd>
     Main draw function.
  This is the main draw function that is required to be run in <code>love.draw()</code>.
 
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+         <i>Required</i> The X position of the center of the radar chart.
+        </li>
+        <li><span class="parameter">y</span>
+         <i>Required</i> The Y position of the center of the radar chart.
+        </li>
+        <li><span class="parameter">radius</span>
+         <i>Required</i> The radius of the radar chart from the center defined from X and Y.
+        </li>
+    </ul>
 
 
 
@@ -187,11 +184,12 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:setData"></a>
-    <strong>RadarChart:setData (data)</strong>
+    <a name = "setData"></a>
+    <strong>setData (data)</strong>
     </dt>
     <dd>
     Set the data set.
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -218,11 +216,12 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:getData"></a>
-    <strong>RadarChart:getData ()</strong>
+    <a name = "getData"></a>
+    <strong>getData ()</strong>
     </dt>
     <dd>
     Return the data set.
+
 
 
     <h3>Returns:</h3>
@@ -236,91 +235,14 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:setPosition"></a>
-    <strong>RadarChart:setPosition (x, y)</strong>
-    </dt>
-    <dd>
-    Set the X and Y position of the center.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">x</span>
-         <i>Required</i> The X position of the center of the radar chart.
-        </li>
-        <li><span class="parameter">y</span>
-         <i>Required</i> The Y position of the center of the radar chart.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "RadarChart:getPosition"></a>
-    <strong>RadarChart:getPosition ()</strong>
-    </dt>
-    <dd>
-    Return the X and Y position of the center.
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        number,number
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "RadarChart:setRadius"></a>
-    <strong>RadarChart:setRadius (radius)</strong>
-    </dt>
-    <dd>
-    Set the radius.
- This will be drawn at the outmost horizontal tick. Keep in mind, the text will be drawn outside of this radius.
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">radius</span>
-         The radius that the radar chart should draw at.
-        </li>
-    </ul>
-
-
-
-
-
-</dd>
-    <dt>
-    <a name = "RadarChart:getRadius"></a>
-    <strong>RadarChart:getRadius ()</strong>
-    </dt>
-    <dd>
-    Return the radius.
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        number
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "RadarChart:setTicks"></a>
-    <strong>RadarChart:setTicks (ticks)</strong>
+    <a name = "setTicks"></a>
+    <strong>setTicks (ticks)</strong>
     </dt>
     <dd>
     Set the number of ticks.
  This is the number of horizontal ticks that will be drawn on the chart.
  Defaults to 1
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -335,11 +257,12 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:getTicks"></a>
-    <strong>RadarChart:getTicks ()</strong>
+    <a name = "getTicks"></a>
+    <strong>getTicks ()</strong>
     </dt>
     <dd>
     Return the number of ticks.
+
 
 
     <h3>Returns:</h3>
@@ -353,12 +276,13 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:setRadianOffset"></a>
-    <strong>RadarChart:setRadianOffset (radian_offset)</strong>
+    <a name = "setRadianOffset"></a>
+    <strong>setRadianOffset (radian_offset)</strong>
     </dt>
     <dd>
     Set the radian offset.
  Defaults to -pi/2 (first element on top)
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -373,11 +297,12 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:getRadianOffset"></a>
-    <strong>RadarChart:getRadianOffset ()</strong>
+    <a name = "getRadianOffset"></a>
+    <strong>getRadianOffset ()</strong>
     </dt>
     <dd>
     Returns the radian offset.
+
 
 
     <h3>Returns:</h3>
@@ -391,11 +316,12 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:setColor"></a>
-    <strong>RadarChart:setColor (name, color)</strong>
+    <a name = "setColor"></a>
+    <strong>setColor (name, color)</strong>
     </dt>
     <dd>
     Sets the color of an element.
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -420,11 +346,12 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:getColor"></a>
-    <strong>RadarChart:getColor (name)</strong>
+    <a name = "getColor"></a>
+    <strong>getColor (name)</strong>
     </dt>
     <dd>
     Return the color for an element.
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -444,11 +371,12 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:setDrawMode"></a>
-    <strong>RadarChart:setDrawMode (name, drawmode)</strong>
+    <a name = "setDrawMode"></a>
+    <strong>setDrawMode (name, drawmode)</strong>
     </dt>
     <dd>
     Sets the drawmode of an element.
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -471,11 +399,12 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:getDrawMode"></a>
-    <strong>RadarChart:getDrawMode (name)</strong>
+    <a name = "getDrawMode"></a>
+    <strong>getDrawMode (name)</strong>
     </dt>
     <dd>
     Return the DrawMode for an element.
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -495,13 +424,14 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:setFont"></a>
-    <strong>RadarChart:setFont (font)</strong>
+    <a name = "setFont"></a>
+    <strong>setFont (font)</strong>
     </dt>
     <dd>
     Set the font.
  Set the font that the labels will be drawn with.<br/>
  Default is the default LÖVE font.
+
 
     <h3>Parameters:</h3>
     <ul>
@@ -516,12 +446,13 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:getFont"></a>
-    <strong>RadarChart:getFont ()</strong>
+    <a name = "getFont"></a>
+    <strong>getFont ()</strong>
     </dt>
     <dd>
     Return the font.
  Returns the font that is currently set.
+
 
 
     <h3>Returns:</h3>
@@ -535,20 +466,27 @@
 
 </dd>
     <dt>
-    <a name = "RadarChart:_point"></a>
-    <strong>RadarChart:_point (index, rad)</strong>
+    <a name = "_point"></a>
+    <strong>_point (index, x, y, radius)</strong>
     </dt>
     <dd>
     Determine the point at a specific radius from the objects internals.
  This is an internal function.
 
+
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">index</span>
-         The index of the data set to be used.
+         <i>Required</i> The index of the data set to be used.
         </li>
-        <li><span class="parameter">rad</span>
-         The radius for the calculation.
+        <li><span class="parameter">x</span>
+         <i>Required</i> The X position of the center of the radar chart.
+        </li>
+        <li><span class="parameter">y</span>
+         <i>Required</i> The Y position of the center of the radar chart.
+        </li>
+        <li><span class="parameter">radius</span>
+         <i>Required</i> The radius for the calculation.
         </li>
     </ul>
 
@@ -568,7 +506,7 @@
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
-<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.0</a></i>
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.2</a></i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
