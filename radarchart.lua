@@ -97,7 +97,7 @@ function RadarChart:draw(x,y,radius)
     local vpoints = {prevx,prevy,vx,vy,x,y}
     love.graphics.polygon(self._drawmodes.integral,vpoints)
     prevx,prevy = vx,vy
-    local tx,ty = self:_point(i,x,y,radius+self._font:getHeight())
+    local tx,ty = self:_point(i-1,x,y,radius+self._font:getHeight())
     local tx_offset = tx < x and -self._font:getWidth(v.label) or 0
     love.graphics.setColor(self._colors.font)
     love.graphics.print(v.label,tx+tx_offset,ty-self._font:getHeight()/2)
