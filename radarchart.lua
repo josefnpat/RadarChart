@@ -5,8 +5,8 @@
 -- @license <a href="http://www.opensource.org/licenses/zlib-license.php">zlib/libpng</a>
 
 local RadarChart = {
-  _VERSION = "RadarChart v1.0.0",
-  _DESCRIPTION = "LÖVE module fir drawing radar/spider charts.",
+  _VERSION = "RadarChart v1.0.1",
+  _DESCRIPTION = "LÖVE module for drawing radar/spider charts.",
   _URL = "https://github.com/josefnpat/RadarChart/",
   _LICENSE = [[
     The zlib/libpng License
