@@ -1,1 +1,4 @@
 doc/
+*.src.rock
+*.rockspec
+!radarchart-default.rockspec
